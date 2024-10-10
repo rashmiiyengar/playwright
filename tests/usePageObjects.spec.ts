@@ -12,7 +12,8 @@ test("Navigate to form page", async ({ page }) => {
 });
 
 test("Parameterized methods", async ({ page }) => {
-    const pm = new PageManager(page);
+
+  const pm = new PageManager(page);
   await pm.navigateTo().formLayoutsPage();
 
   await pm.onFormsLayoutPage().submitUsingTheGridFormWithCredsAndSelectOption(
