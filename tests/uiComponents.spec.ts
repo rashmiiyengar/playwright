@@ -6,7 +6,7 @@ test.describe("Forms layout page", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("http://localhost:4200/");
     const navigateTo = new NavigationPage(page)
-    await navigateTo.toolTipPage();
+    await navigateTo.formLayoutsPage();
   });
 
   test("input fields", async ({ page }) => {
