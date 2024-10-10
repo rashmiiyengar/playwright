@@ -1,12 +1,11 @@
 import { test, expect } from "@playwright/test";
-import NavigationPage from "../page-objects/navigationPage";
-
+import PageManager from "../page-objects/pageManager";
 
 test.describe("Forms layout page", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("http://localhost:4200/");
-    const navigateTo = new NavigationPage(page)
-    await navigateTo.formLayoutsPage();
+    const pm = new PageManager(page);
+    await pm.navigateTo().formLayoutsPage();
   });
 
   test("input fields", async ({ page }) => {
@@ -66,15 +65,13 @@ test.describe("Forms layout page", () => {
 });
 
 test.describe("ui compoments advanced", () => {
-
-    test.beforeEach(async ({ page })=>{
-        await page.goto("http://localhost:4200/");
-    })
+  test.beforeEach(async ({ page }) => {
+    await page.goto("http://localhost:4200/");
+  });
 
   test("tooltip", async ({ page }) => {
-    
-    const navigateTo = new NavigationPage(page)
-    await navigateTo.toolTipPage();
+    const pm = new PageManager(page);
+    pm.navigateTo().toolTipPage();
 
     const toolTipCard = page.locator("nb-card", {
       hasText: "Tooltip Placements",
@@ -87,9 +84,8 @@ test.describe("ui compoments advanced", () => {
   });
 
   test("Dialog box", async ({ page }) => {
-   
-    const navigateTo = new NavigationPage(page)
-    await navigateTo.smartTablePage();
+    const pm = new PageManager(page);
+    pm.navigateTo().smartTablePage();
 
     page.on("dialog", (dialog) => {
       expect(dialog.message()).toEqual("Are you sure you want to delete?");
@@ -106,9 +102,8 @@ test.describe("ui compoments advanced", () => {
   });
 
   test("Webtables", async ({ page }) => {
-    
-    const navigateTo = new NavigationPage(page)
-    await navigateTo.smartTablePage();
+    const pm = new PageManager(page);
+    pm.navigateTo().smartTablePage();
 
     //get the row by any test in this row
     const targetrow = page.getByRole("row", { name: "twitter@outlook.com" });
@@ -141,54 +136,59 @@ test.describe("ui compoments advanced", () => {
       for (let row of await ageRows.all()) {
         const cellValue = await row.locator("td").last().textContent();
 
-        if(age == "200"){
-            expect(await page.getByRole('table').textContent()).toContain('No data found')
-        }else{
-            expect(cellValue).toEqual(age);
+        if (age == "200") {
+          expect(await page.getByRole("table").textContent()).toContain(
+            "No data found"
+          );
+        } else {
+          expect(cellValue).toEqual(age);
         }
       }
     }
   });
 
-  test('Date pickers',async({page})=>{
+  test("Date pickers", async ({ page }) => {
+    const pm = new PageManager(page);
+    pm.navigateTo().datePickerPage();
 
-    const navigateTo = new NavigationPage(page)
-    await navigateTo.datePickerPage();
-
-    const calenderInput = page.getByPlaceholder('Form Picker');
+    const calenderInput = page.getByPlaceholder("Form Picker");
     await calenderInput.click();
 
     let date = new Date();
-    date.setDate(date.getDate() +29);
+    date.setDate(date.getDate() + 29);
     const expectedDat = date.getDate().toString();
-    
+
     //console.log(`Current date: ${expectedDat}`);
 
-    const expectedMonthShort=  date.toLocaleString('En-US',{month:'short'});
-    const expectedMonthLong=  date.toLocaleString('En-US',{month:'long'});
+    const expectedMonthShort = date.toLocaleString("En-US", { month: "short" });
+    const expectedMonthLong = date.toLocaleString("En-US", { month: "long" });
     const expectedYear = date.getFullYear();
-    const dateToAssert = `${expectedMonthShort} ${expectedDat}, ${expectedYear}`
+    const dateToAssert = `${expectedMonthShort} ${expectedDat}, ${expectedYear}`;
 
-    let calenderMonthandYear = await page.locator('nb-calendar-view-mode').textContent();
-    const expectedMonthandYear = `${expectedMonthLong} ${expectedYear}`
+    let calenderMonthandYear = await page
+      .locator("nb-calendar-view-mode")
+      .textContent();
+    const expectedMonthandYear = `${expectedMonthLong} ${expectedYear}`;
 
-    while(!calenderMonthandYear.includes(expectedMonthandYear)){
-        await page.locator('nb-icon [data-name="chevron-right"]').click();
-        calenderMonthandYear = await page.locator('nb-calendar-view-mode').textContent();
+    while (!calenderMonthandYear.includes(expectedMonthandYear)) {
+      await page.locator('nb-icon [data-name="chevron-right"]').click();
+      calenderMonthandYear = await page
+        .locator("nb-calendar-view-mode")
+        .textContent();
     }
 
     console.log(`calenderInput: ${calenderInput}`);
     console.log(`dateToAssert: ${dateToAssert}`);
 
-    await page.locator('.day-cell.ng-star-inserted .cell-content')
-    .getByText(expectedDat,{exact:true})
-    .click();
-    
+    await page
+      .locator(".day-cell.ng-star-inserted .cell-content")
+      .getByText(expectedDat, { exact: true })
+      .click();
+
     await expect(calenderInput).toHaveValue(dateToAssert);
+  });
 
-  })
-
-  test('Sliders',async({page})=>{
+  test("Sliders", async ({ page }) => {
     //update attribute
     // const tempGage = page.locator('[tabtitle="Temperature"] ngx-temperature-dragger circle');
     // await tempGage.evaluate((node)=>{
@@ -197,22 +197,20 @@ test.describe("ui compoments advanced", () => {
     // })
     // await tempGage.click();
 
-
     //Mouse movement
-    const tempGuageMouse = page.locator('[tabtitle="Temperature"] ngx-temperature-dragger');
+    const tempGuageMouse = page.locator(
+      '[tabtitle="Temperature"] ngx-temperature-dragger'
+    );
     await tempGuageMouse.scrollIntoViewIfNeeded();
 
     const box = await tempGuageMouse.boundingBox();
-    const x = box.x + box.width /2;
-    const y = box.x + box.height /2;
+    const x = box.x + box.width / 2;
+    const y = box.x + box.height / 2;
 
-    await page.mouse.move(x,y)
+    await page.mouse.move(x, y);
     await page.mouse.down();
-    await page.mouse.move(x-100,y);
-    await page.mouse.move(x-100,y+100);
+    await page.mouse.move(x - 100, y);
+    await page.mouse.move(x - 100, y + 100);
     await page.mouse.up();
-
-  })
-
-
+  });
 });
