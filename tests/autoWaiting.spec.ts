@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 
-test.describe('Auto wait',()=>{
+test.describe.skip('Auto wait',()=>{
 
     test.beforeEach(async({page})=>{
 

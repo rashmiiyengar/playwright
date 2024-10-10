@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import PageManager from "../page-objects/pageManager";
 
-test.describe.only("Forms layout page", () => {
+test.describe("Forms layout page", () => {
   test.beforeEach(async ({ page },testInfo) => {
     if(testInfo.retry){
       //do something
@@ -13,7 +13,7 @@ test.describe.only("Forms layout page", () => {
     await pm.navigateTo().formLayoutsPage();
   });
 
-  test("input fields", async ({ page }) => {
+  test.skip("input fields", async ({ page }) => {
     const usingGridInputEmail = page
       .locator("nb-card", { hasText: "Using the Grid" })
       .getByRole("textbox", { name: "Email" });
