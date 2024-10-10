@@ -33,9 +33,9 @@ test("Date picker - select number of dates from today", async ({ page }) => {
 
     const datePickerPage = new DatePickerPage(page);
 
-    await datePickerPage.selectCommonDatePickerDateFromToday(7)
+    await datePickerPage.selectCommonDatePickerDateFromToday(7);
     
-
+    await datePickerPage.selectDatePickerWithRange(7,14);
   });
 
 
