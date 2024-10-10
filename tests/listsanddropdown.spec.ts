@@ -51,7 +51,6 @@ test.describe('lists and dropdowns',()=>{
             await optionList.filter({hasText:color}).click();
             await expect(header).toHaveCSS('background-color',colors[color])
             
-
         }
 
 
