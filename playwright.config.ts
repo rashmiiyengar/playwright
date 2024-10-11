@@ -48,6 +48,12 @@ export default defineConfig<TestOptions>({
       name: 'firefox',
       use: { browserName:'firefox' },
     },
+    {
+      name: 'mobile',
+      testMatch:'testMobile.spec.ts',
+
+      use: { ...devices['iPhone 13 Pro'] },
+    },
 
   ]
 });
