@@ -112,7 +112,9 @@ test.describe('Form Spec @smoke',()=>{
 
     })
 
-    
+    test('test',async({page})=>{
+        await page.goto('/');
+    })
 
 
 })
