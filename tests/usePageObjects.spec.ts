@@ -46,3 +46,16 @@ test("Date picker - select number of dates from today @smoke", async ({ page }) 
 
   await pm.onDatepickerPage().selectDatePickerWithRange(7, 14);
 });
+
+test("Playwright github actions with ARGOS CI", async ({ page }) => {
+  const pm = new PageManager(page);
+  await pm.navigateTo().datePickerPage();
+  await pm.onDatepickerPage().selectCommonDatePickerDateFromToday(7);
+  await page.screenshot({path:'screenshots/formlayoutpage.png'})
+  const buffer = await page.screenshot();
+
+  await page.getByPlaceholder("Range Picker").screenshot({path:'screenshots/FormComponent1.png'})
+  //screenshot for a particular component only
+
+  await pm.onDatepickerPage().selectDatePickerWithRange(7, 14);
+});

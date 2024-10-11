@@ -1,13 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
 import type { TestOptions } from './testOptions';
-import { DARK_THEME } from './src/app/@theme/styles/theme.dark';
-
 
 require('dotenv').config();
 
 export default defineConfig<TestOptions>({
   
-  timeout:10000,
+  timeout:40000,
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: false,
@@ -55,5 +53,13 @@ export default defineConfig<TestOptions>({
       use: { ...devices['iPhone 13 Pro'] },
     },
 
-  ]
+  ],
+
+  webServer:{
+    command:'npm run start',
+    url:'http://localhost:4200/',
+    reuseExistingServer: true,
+    timeout: 180 * 1000
+  }
+
 });

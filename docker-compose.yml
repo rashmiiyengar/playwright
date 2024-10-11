@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  playwright-test:
+    image: playwright-test
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: npm run pageObjectsChrome
+    volumes:
+      - ./playwright-report/:/app/playwrightreport
+      - ./test-results/:/app/test-results
