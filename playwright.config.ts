@@ -1,9 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
 import type { TestOptions } from './testOptions';
+import { DARK_THEME } from './src/app/@theme/styles/theme.dark';
+
 
 require('dotenv').config();
 
 export default defineConfig<TestOptions>({
+  
   timeout:10000,
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -22,7 +25,8 @@ export default defineConfig<TestOptions>({
     baseURL: 'http://localhost:4200/',
     globalQaUrl:'"https://www.globalsqa.com/demo-site/drapanddrop/"',
     trace: 'on-first-retry',
-    video:'off'
+    video:'off',
+    
   },
 
   projects: [
