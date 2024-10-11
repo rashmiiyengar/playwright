@@ -1,7 +1,9 @@
-import { test, expect } from "@playwright/test";
+import {  expect } from "@playwright/test";
+import {test} from '../testOptions';
 
-test('drap and drop ',async({page})=>{
 
-    await page.goto("https://www.globalsqa.com/demo-site/drapanddrop/");
+test('drap and drop ',async({page,globalQaUrl})=>{
+
+    await page.goto(globalQaUrl);
 
 })

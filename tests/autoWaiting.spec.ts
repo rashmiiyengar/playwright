@@ -4,7 +4,7 @@ test.describe.skip('Auto wait',()=>{
 
     test.beforeEach(async({page})=>{
 
-        await page.goto('http://uitestingplayground.com/ajax');
+        await page.goto(process.env.URL);
         await page.getByText('Button Triggering AJAX Request').click();
         
     })

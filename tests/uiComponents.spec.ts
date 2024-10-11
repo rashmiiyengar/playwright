@@ -8,7 +8,7 @@ test.describe("Forms layout page", () => {
       //like cleanup data base 
     }
     test.describe.configure({retries:2})
-    await page.goto("http://localhost:4200/");
+    await page.goto("/");
     const pm = new PageManager(page);
     await pm.navigateTo().formLayoutsPage();
   });
@@ -71,7 +71,7 @@ test.describe("Forms layout page", () => {
 
 test.describe("ui compoments advanced", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("http://localhost:4200/");
+    await page.goto("/");
   });
 
   test("tooltip", async ({ page }) => {

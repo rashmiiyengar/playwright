@@ -3,7 +3,7 @@ import PageManager from "../page-objects/pageManager";
 import { faker } from "@faker-js/faker";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("http://localhost:4200/");
+  await page.goto("/");
 });
 
 test("Navigate to form page", async ({ page }) => {
@@ -40,7 +40,7 @@ test("Date picker - select number of dates from today", async ({ page }) => {
   await pm.onDatepickerPage().selectCommonDatePickerDateFromToday(7);
   await page.screenshot({path:'screenshots/formlayoutpage.png'})
   const buffer = await page.screenshot();
-  
+
   await page.getByPlaceholder("Range Picker").screenshot({path:'screenshots/FormComponent1.png'})
   //screenshot for a particular component only
 

@@ -3,7 +3,7 @@ import {test,expect} from '@playwright/test';
 test.describe('lists and dropdowns',()=>{
 
     test.beforeEach(async({page})=>{
-        await page.goto('http://localhost:4200/');
+        await page.goto('/');
     })
 
     test('list dropdown choose cosmic listoption and validate',async({page})=>{
