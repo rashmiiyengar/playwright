@@ -1,6 +1,6 @@
 import {expect, test} from '@playwright/test';
 
-test.describe('Form Spec',()=>{
+test.describe('Form Spec @smoke',()=>{
 
     test.beforeEach(async({page})=>{
         await page.goto('/');

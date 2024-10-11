@@ -3,16 +3,16 @@ import PageManager from "../page-objects/pageManager";
 import { faker } from "@faker-js/faker";
 
 
-test("Parameterized methods", async ({ page,formLayoutPage }) => {
+test("Parameterized methods", async ({ pageManager }) => {
   const randomFullName = faker.person.fullName();
   const ramdomEmail = `${randomFullName.replace(" ", "")}${faker.number.int(
     100
   )}@test.com`;
 
-  const pm = new PageManager(page);
+ 
   //await pm.navigateTo().formLayoutsPage();
 
-  await pm
+  await pageManager
     .onFormsLayoutPage()
     .submitUsingTheGridFormWithCredsAndSelectOption(
       "test@test.com",
@@ -20,7 +20,7 @@ test("Parameterized methods", async ({ page,formLayoutPage }) => {
       "Option 1"
     );
 
-  await pm
+  await pageManager
     .onFormsLayoutPage()
     .submitUsingInlineForm(randomFullName, ramdomEmail, true);
 });
