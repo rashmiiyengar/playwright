@@ -28,16 +28,7 @@ export default defineConfig<TestOptions>({
   },
 
   projects: [
-    {
-      name: 'dev',
-      use: { ...devices['Desktop Chrome'],
-      baseURL:'http://localhost:4201' },//replace dev url 
-    },
-    {
-      name: 'staging',
-      use: { ...devices['Desktop Chrome'],
-      baseURL:'http://localhost:4202' },//replace stage url 
-    },
+   
     {
       name: 'chromium',
     },

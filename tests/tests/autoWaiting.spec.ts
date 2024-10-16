@@ -1,48 +1,36 @@
-import {test,expect} from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test.describe.skip('Auto wait',()=>{
+test.describe.skip("Auto wait", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(process.env.URL);
+    await page.getByText("Button Triggering AJAX Request").click();
+  });
 
-    test.beforeEach(async({page})=>{
+  test("Auto waiting", async ({ page }) => {
+    const successBtn = page.locator(".bg-success");
+    await successBtn.click();
+    await successBtn.waitFor({ state: "attached" });
+    const textData = await successBtn.allTextContents();
+    expect(textData).toContain("Data loaded with AJAX get request.");
 
-        await page.goto(process.env.URL);
-        await page.getByText('Button Triggering AJAX Request').click();
-        
-    })
+    await expect(successBtn).toHaveText("Data loaded with AJAX get request.", {
+      timeout: 20000,
+    });
+  });
 
-    test('Auto waiting',async ({page})=>{
-        
-        const successBtn = page.locator('.bg-success');
-        await successBtn.click();
+  test("alternative waiting", async ({ page }) => {
+    const successBtn = page.locator(".bg-success");
+    await page.waitForResponse(process.env.URL);
 
-        await successBtn.waitFor({state:"attached"})
-        const textData= await successBtn.allTextContents();
-        expect(textData).toContain('Data loaded with AJAX get request.')
+    const textData = await successBtn.allTextContents();
 
-        await expect(successBtn).toHaveText('Data loaded with AJAX get request.',{timeout:20000})
-    })
+    await expect(successBtn).toHaveText("Data loaded with AJAX get request.");
+  });
 
-    test('alternative waiting',async ({page})=>{
-    
-        const successBtn = page.locator('.bg-success');
+  test("timeouts", async ({ page }) => {
+    test.slow();
+    const successBtn = page.locator(".bg-success");
 
-        //wait for element
-        //await page.waitForSelector('.bg-success');
-       
-        //wait for particular response
-        await page.waitForResponse("http://uitestingplayground.com/ajaxdata")
-
-        const textData= await successBtn.allTextContents();
-
-        await expect(successBtn).toHaveText('Data loaded with AJAX get request.');
-        
-    })
-
-    test('timeouts',async ({page})=>{
-        test.slow();
-        const successBtn = page.locator('.bg-success');
-
-        await successBtn.click()
-        
-    })
-
-})
+    await successBtn.click();
+  });
+});

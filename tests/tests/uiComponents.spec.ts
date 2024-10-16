@@ -2,12 +2,12 @@ import { test, expect } from "@playwright/test";
 import PageManager from "../page-objects/pageManager";
 
 test.describe("Forms layout page", () => {
-  test.beforeEach(async ({ page },testInfo) => {
-    if(testInfo.retry){
+  test.beforeEach(async ({ page }, testInfo) => {
+    if (testInfo.retry) {
       //do something
-      //like cleanup data base 
+      //like cleanup data base
     }
-    test.describe.configure({retries:2})
+    test.describe.configure({ retries: 2 });
     await page.goto("/");
     const pm = new PageManager(page);
     await pm.navigateTo().formLayoutsPage();
