@@ -1,4 +1,4 @@
-import { Locator, Page, expect } from "@playwright/test";
+import { Page, expect } from "@playwright/test";
 
 class DatePickerPage {
   private readonly page: Page;
