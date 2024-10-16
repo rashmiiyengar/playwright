@@ -1,17 +1,16 @@
 import { test } from "../testOptions";
-import PageManager from "../page-objects/pageManager";
 import { faker } from "@faker-js/faker";
 
 test("Parameterized methods", async ({ pageManager }) => {
   const randomFullName = faker.person.fullName();
   const ramdomEmail = `${randomFullName.replace(" ", "")}${faker.number.int(
     100
-  )}@test.com`;
+  )}@gmail.com`;
 
   await pageManager
     .onFormsLayoutPage()
     .submitUsingTheGridFormWithCredsAndSelectOption(
-      "test@test.com",
+      "test@gmail.com",
       "Welcome1",
       "Option 1"
     );
@@ -19,4 +18,7 @@ test("Parameterized methods", async ({ pageManager }) => {
   await pageManager
     .onFormsLayoutPage()
     .submitUsingInlineForm(randomFullName, ramdomEmail, true);
+
+  
+  
 });
