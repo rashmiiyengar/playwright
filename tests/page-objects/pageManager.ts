@@ -3,7 +3,6 @@ import NavigationPage from "../page-objects/navigationPage";
 import FormLayoutsPage from "../page-objects/formLayoutsPage";
 import DatePickerPage from "../page-objects/datePickerPage";
 
-
 class PageManager{
 
     private readonly page:Page;

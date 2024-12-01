@@ -12,7 +12,7 @@
     "pageObjectsChrome": "npx playwright test usePageObjects.spec.ts --project=chromium",
     "clean:allure": "rm -rf allure-results allure-report",
     "generate:allure":"allure generate allure-results -o allure-report",
-    "test:allure": "npm run clean:allure && npx playwright test && allure generate allure-results --clean && allure open"
+    "test:allure": "npm run clean:allure && npx playwright test tests/usePageObjects.ts && allure generate allure-results --clean && allure open"
   },
   "dependencies": {
     "@angular/animations": "^14.2.12",

@@ -34,7 +34,7 @@ test("Parameterized methods @smoke", async ({ page }) => {
     .submitUsingInlineForm(randomFullName, ramdomEmail, true);
 });
 
-test("Date picker - select number of dates from today @smoke", async ({
+test("Date picker - select number of dates from today got range @smoke", async ({
   page,
 }) => {
   const pm = new PageManager(page);
@@ -44,11 +44,11 @@ test("Date picker - select number of dates from today @smoke", async ({
   const buffer = await page.screenshot();
 
   await page
-    .getByPlaceholder("Range Picker")
+    .getByPlaceholder("Form Picker")
     .screenshot({ path: "screenshots/FormComponent1.png" });
   //screenshot for a particular component only
 
-  await pm.onDatepickerPage().selectDatePickerWithRange(7, 14);
+  await pm.onDatepickerPage().selectDatePickerWithRange(0, 7);
 });
 
 test("Date picker - select number of dates from today ", async ({ page }) => {

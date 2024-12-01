@@ -53,11 +53,13 @@ class DatePickerPage {
 
     const expectedMonthandYear = `${expectedMonthLong} ${expectedYear}`;
 
-    while (!calenderMonthandYear.includes(expectedMonthandYear)) {
-      await this.page.locator('nb-icon [data-name="chevron-right"]').click();
-      calenderMonthandYear = await this.page
-        .locator("nb-calendar-view-mode")
-        .textContent();
+    if (!calenderMonthandYear.includes(expectedMonthandYear)) {
+      while (!calenderMonthandYear.includes(expectedMonthandYear)) {
+        await this.page.locator('nb-icon [data-name="chevron-right"]').click();
+        calenderMonthandYear = await this.page
+          .locator("nb-calendar-view-mode")
+          .textContent();
+      }
     }
 
     await this.page

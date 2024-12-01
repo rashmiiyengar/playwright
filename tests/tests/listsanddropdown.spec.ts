@@ -25,7 +25,6 @@ test.describe("lists and dropdowns", () => {
     ]);
 
     await optionList.filter({ hasText: "Cosmic" }).click();
-
     const header = page.locator("nb-layout-header");
     await expect(header).toHaveCSS("background-color", "rgb(50, 50, 89)");
   });

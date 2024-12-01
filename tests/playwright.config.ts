@@ -23,7 +23,7 @@ export default defineConfig<TestOptions>({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'http://localhost:4200/',
-    globalQaUrl:'"https://www.globalsqa.com/demo-site/drapanddrop/"',
+    globalQaUrl:'"https://wxww.globalsqa.com/demo-site/drapanddrop/"',
     trace: 'on-first-retry',
     video:'off',
     
